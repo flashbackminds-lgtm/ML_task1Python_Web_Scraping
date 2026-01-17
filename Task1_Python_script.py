@@ -5,6 +5,8 @@
 import os
 import requests
 import re
+import sys
+from bs4 import BeautifulSoup
 # Code here - Import BeautifulSoup library
 
 # Code ends here
@@ -12,7 +14,7 @@ import re
 # function to get the html source text of the medium article
 def get_page():
 	global url
-	
+	url = input("Enter url of a medium article: ").strip()
 	# Code here - Ask the user to input "Enter url of a medium article: " and collect it in url
 	
 	# Code ends here
@@ -22,6 +24,7 @@ def get_page():
 		print('Please enter a valid website, or make sure it is a medium article')
 		sys.exit(1)
 
+    res = requests.get(url)
 	# Code here - Call get method in requests object, pass url and collect it in res
 	
 	# Code ends here
@@ -55,6 +58,8 @@ def save_file(text):
 	name = url.split("/")[-1]
 	print(name)
 	fname = f'scraped_articles/{name}.txt'
+    with open(fname,'w')as f:
+        f.write(text)
 	
 	# Code here - write a file using with (2 lines)
 	
